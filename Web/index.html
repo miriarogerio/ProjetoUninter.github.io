@@ -6,6 +6,122 @@
     <title>Marcação</title>
 </head>
 <body>
+     <header>
+       <nav>
+            <div class="pesquisa">
+                <form id="formBusca" action="#" method="GET">
+                    <input type="search" name="q" id="inputBuscaNav" autocomplete="off" placeholder="Pesquise por tarefa..." onkeyup="listarTarefas()">
+                    <button type="submit">
+                        <span> &#8981; </span>
+                    </button> 
+                </form>
+
+                <a href="pagina03.html" id="adicionar">
+                    <button type="button" id="btnNovo"> &#10011; </button>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <ul id="listaTarefas"></ul>
     
+    </main>
+    
+
+
+
 </body>
+
+
+
+<script>
+    const STORAGE_KEY = 'sistema_tarefas_uninter_v1';
+
+
+const obterTarefas = () => JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+
+function listarTarefas() {
+    const listaElemento = document.getElementById('listaTarefas');
+    const termo = document.getElementById('inputBuscaNav').value.toLowerCase();
+    
+    const tarefas = obterTarefas();
+    const filtradas = tarefas.filter(t => t.titulo.toLowerCase().includes(termo));
+
+    listaElemento.innerHTML = "";
+
+    if (filtradas.length === 0) {
+        listaElemento.innerHTML = "<li style='color: orange; padding: 20px; text-align: center;'>⚠️ Nenhuma tarefa encontrada.</li>";
+        return;
+    }
+
+    filtradas.forEach(tarefa => {
+        const item = document.createElement('li');
+        item.style.listStyle = "none";
+        
+        const ehConcluida = tarefa.status === 'concluida';
+        const classeContainer = ehConcluida ? 'tarefa-concluida' : 'tarefa-item';
+        const classeTexto = ehConcluida ? 'texto-riscado' : '';
+        const icone = ehConcluida ? "✅" : "⏳";
+        
+        item.innerHTML = `
+            <div class="${classeContainer}">
+                <div class="tarefa-info">
+                    <span class="${classeTexto}">
+                        ${icone} <strong>${tarefa.titulo}</strong> 
+                        <span class="badge-prioridade ${tarefa.prioridade}">
+                            ${tarefa.prioridade.toUpperCase()}
+                        </span>
+                    </span><br>
+
+                    <small><strong>Prazo:</strong> ${tarefa.data}</small><br>
+                    <small><strong>Descrição:</strong> ${tarefa.descricao || 'Sem descrição'}</small>
+                    
+                </div>
+                
+                <div class="tarefa-acoes">
+                    <button onclick="alternarStatus(${tarefa.id})">${ehConcluida ? 'Reabrir' : 'Concluir'}</button>
+                    <button onclick="irParaEditar(${tarefa.id})">Editar</button>
+                    <button onclick="excluirTarefa(${tarefa.id})" class="btn-excluir">Excluir</button>
+                </div>
+            </div>
+        `;
+        listaElemento.appendChild(item);
+    });
+}
+
+
+document.getElementById('formBusca')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    listarTarefas();
+});
+
+function alternarStatus(id) {
+    const tarefas = obterTarefas();
+    const novaLista = tarefas.map(t => {
+        if (t.id === id) t.status = (t.status === 'concluida' ? 'pendente' : 'concluida');
+        return t;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(novaLista));
+    listarTarefas();
+}
+
+function excluirTarefa(id) {
+    if (confirm("Deseja apagar esta tarefa?")) {
+        const tarefas = obterTarefas().filter(t => t.id !== id);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(tarefas));
+        listarTarefas();
+    }
+}
+
+function irParaEditar(id) {
+    localStorage.setItem('editando_id', id);
+    window.location.href = "pagina03.html";
+}
+
+
+window.onload = listarTarefas;
+   
+</script>
 </html>
