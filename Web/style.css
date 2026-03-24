@@ -99,22 +99,11 @@ button span {
     color: #7f8c8d;
 }
 
-.tarefa-item, .tarefa-concluida {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    margin-bottom: 15px;
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-    background: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    border-radius: 4px;
-}
+
 
 .tarefa-conteudo {
     display: flex;
-    flex-direction: column; /* FORÇA OS BOTÕES PARA BAIXO */
+    flex-direction: column; 
     gap: 15px;
 }
 
@@ -146,18 +135,19 @@ button span {
     margin-left: 5px;
 }
 
-.tarefa-conteudo {
-    display: flex;
-    flex-direction: column; /* FORÇA OS BOTÕES PARA BAIXO */
-    gap: 15px;
-}
 
 
 .tarefa-item, .tarefa-concluida {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    margin-bottom: 15px;
     display: flex;
     flex-direction: column;
+    border-bottom: 1px solid #ddd;
     background: white;
+    justify-content: space-between;
     margin-bottom: 15px;
+    align-items: flex-start;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
