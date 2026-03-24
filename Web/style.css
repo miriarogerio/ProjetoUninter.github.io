@@ -1,0 +1,205 @@
+@charset "UTF-8";
+
+
+body{
+    
+    background-color: #081226;
+}
+
+main{
+    background-color: aliceblue;
+    margin: auto;
+    padding: 10px;
+    border-radius: 1px;
+}
+
+header{
+    background-color: #142f7fec;
+    height: 80px;
+    margin-top: 2px;
+    border-radius: 3px 0px;
+}
+
+
+
+.pesquisa {
+    display: flex;
+    justify-content: center;
+    
+}
+
+#adicionar {
+  display: flex;
+    width: 100%;
+    text-decoration: none;
+    margin-top: 15px;
+    margin-left: 15px;
+    max-width: 43px;
+    border: 2px solid #f3f4f6;
+    overflow: hidden;
+    transition: box-shadow 0.9s;
+}
+
+
+
+form {
+    display: flex;
+    width: 100%;
+    margin-top: 15px;
+    max-width: 800px;
+    border: 2px solid #dfe1e5;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+}
+
+form:focus-within {
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    border-color: transparent;
+}
+
+input[type="search"] {
+    flex: 1; 
+    padding: 12px 20px;
+    border: none;
+    outline: none; 
+    font-size: 20px;
+}
+
+button {
+    background-color: white;
+    border: 1px solid rgba(47, 45, 45, 0.248);
+    padding: 0 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    background-color: #081226;
+    color: white;
+    transform: scale(1.1);
+}
+
+button span {
+    font-size: 18px;
+    color: #5f6368;
+}
+
+
+.tarefa-concluida {
+    background-color: #e8f5e9;
+    opacity: 0.8;
+    border-left: 5px solid #2e7d32;
+}
+
+
+.texto-riscado {
+    text-decoration: line-through;
+    color: #7f8c8d;
+}
+
+.tarefa-item, .tarefa-concluida {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 4px;
+}
+
+.tarefa-conteudo {
+    display: flex;
+    flex-direction: column; /* FORÇA OS BOTÕES PARA BAIXO */
+    gap: 15px;
+}
+
+.tarefa-info {
+    line-height: 1.5;
+}
+
+.tarefa-acoes {
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+.tarefa-acoes button {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+
+.badge-prioridade {
+    font-size: 0.9em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+.tarefa-conteudo {
+    display: flex;
+    flex-direction: column; /* FORÇA OS BOTÕES PARA BAIXO */
+    gap: 15px;
+}
+
+
+.tarefa-item, .tarefa-concluida {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    gap: 12px; 
+}
+
+
+.tarefa-info {
+    width: 100%;
+}
+
+
+.tarefa-acoes {
+    display: flex;
+    gap: 8px;
+    border-top: 1px solid #eee; 
+    padding-top: 10px;
+}
+
+.tarefa-acoes button {
+    padding: 6px 12px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #f9f9f9;
+    transition: 0.2s;
+}
+
+.tarefa-acoes button:hover {
+    background: #e0e0e0;
+}
+
+
+
+.btn-excluir {
+    color: #e74c3c;
+    border-color: #fab1a0 !important;
+}
+
+
+.texto-riscado { text-decoration: line-through; color: #7f8c8d; }
+.badge-prioridade { font-size: 10px; padding: 2px 6px; border-radius: 4px; color: white; }
+.alta { background: #e74c3c; }
+.media { background: #f39c12; }
+.baixa { background: #27ae60; }
