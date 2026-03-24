@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_03.css">
+    <title>Marcação</title>
+</head>
+<body>
+     <main>
+        <div class="conteiner">
+            <div class="box_formulario">
+                <nav>
+                    <a href="index.html" id="voltar"> Voltar</a> 
+                    <h2 class="cabec">Novo Registro</h2>
+                </nav>
+                    
+                
+
+                <form id ="meuFormulario" method="get">
+                    
+                    <input type="text" id="titulo" name="titulo" placeholder="Digite o título...">
+                    <input type="date" id="data" name="criar_data" required>
+
+                    <textarea name="mensagem" id="mensage" placeholder="digite sua tarefa"></textarea>
+                       
+                 <h3 id="priori_titulo">Prioridade</h3> 
+                    <select name="prioridade" id="priori" class="selecionar_prioridade">
+                        <option value="baixa" class="b-baixa">Baixa</option>
+                        <option value="media" class="m-media">Média</option>
+                        <option value="alta" class="a-alta">Alta</option>
+                    </select>
+
+                 <h3 id="status_titulo">Status Atual</h3>
+                  <select name="status" id="star" class="selecionar_status">
+                        <option value="pendente" class="p_pendente">Pendente</option>
+                        <option value="concluida" class="c_concluida">Concluída</option>
+                        
+                    </select>
+                
+                     <button type="submit">Criar Registro</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    
+</body>
+
+  <script>
+      const STORAGE_KEY = 'sistema_tarefas_uninter_v1';
+const formulario = document.getElementById('meuFormulario');
+const editandoId = localStorage.getItem('editando_id');
+
+if (editandoId) {
+    const tarefas = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    const tarefaParaEditar = tarefas.find(t => t.id == editandoId);
+    
+    if (tarefaParaEditar) {
+        document.querySelector('.cabec').innerText = "Editar Registro";
+        document.getElementById('titulo').value = tarefaParaEditar.titulo;
+        document.getElementById('data').value = tarefaParaEditar.data;
+        document.getElementById('mensage').value = tarefaParaEditar.descricao;
+        document.getElementById('priori').value = tarefaParaEditar.prioridade;
+        document.getElementById('star').value = tarefaParaEditar.status;
+    }
+}
+
+formulario.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const titulo = document.getElementById('titulo').value.trim();
+    const mensagem = document.getElementById('mensage').value.trim();
+    const data = document.getElementById('data').value;
+    const prioridade = document.getElementById('priori').value;
+    const status = document.getElementById('star').value;
+
+    
+    if (titulo === "" || mensagem === "") {
+        alert("Erro: O título e a descrição (mensagem) são obrigatórios!");
+        return;
+    }
+
+    let tarefas = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    if (editandoId) {
+        
+        tarefas = tarefas.map(t => {
+            if (t.id == editandoId) {
+                return { ...t, titulo, descricao: mensagem, data, prioridade, status };
+            }
+            return t;
+        });
+        localStorage.removeItem('editando_id'); 
+    } else {
+     
+        const novaTarefa = {
+            id: Date.now(),
+            titulo,
+            descricao: mensagem,
+            data,
+            prioridade,
+            status
+        };
+        tarefas.push(novaTarefa);
+    }
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tarefas));
+    alert("Dados salvos com sucesso!");
+    window.location.href = "index.html";
+});
+    </script>
+</html>
