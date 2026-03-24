@@ -107,16 +107,16 @@ button span {
     gap: 15px;
 }
 
-.tarefa-info {
-    line-height: 1.5;
-}
 
 .tarefa-acoes {
     display: flex;
-    gap: 10px;
-    border-top: 1px solid #eee;
+    gap: 8px;
+    border-top: 1px solid #eee; 
     padding-top: 10px;
 }
+
+
+
 
 .tarefa-acoes button {
     padding: 8px 12px;
@@ -125,6 +125,10 @@ button span {
     cursor: pointer;
     font-size: 13px;
     transition: 0.3s;
+}
+
+.tarefa-acoes button:hover {
+    background: #e0e0e0;
 }
 
 
@@ -157,27 +161,8 @@ button span {
 
 .tarefa-info {
     width: 100%;
-}
+    line-height: 1.5;
 
-
-.tarefa-acoes {
-    display: flex;
-    gap: 8px;
-    border-top: 1px solid #eee; 
-    padding-top: 10px;
-}
-
-.tarefa-acoes button {
-    padding: 6px 12px;
-    cursor: pointer;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background: #f9f9f9;
-    transition: 0.2s;
-}
-
-.tarefa-acoes button:hover {
-    background: #e0e0e0;
 }
 
 
